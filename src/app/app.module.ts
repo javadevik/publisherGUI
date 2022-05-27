@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import {HttpClientModule} from "@angular/common/http";
-import {RouterModule} from "@angular/router";
+import {RouterModule, Routes} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {PublishHttpService} from "./services/publish.http.service";
 import {PosteditorHttpService} from "./services/posteditor.http.service";
@@ -18,8 +18,21 @@ import {NzDatePickerModule} from "ng-zorro-antd/date-picker";
 import {NzButtonModule} from "ng-zorro-antd/button";
 import {NzInputModule} from "ng-zorro-antd/input";
 import {NzDropDownModule} from "ng-zorro-antd/dropdown";
+import {RouterTestingModule} from "@angular/router/testing";
 
 registerLocaleData(en);
+
+const routes: Routes = [
+  {
+    path: '',
+    component: AppComponent
+  },
+  {
+    path: 'publishes/:title',
+    component: AppComponent
+  },
+];
+
 
 // @ts-ignore
 //
@@ -33,12 +46,13 @@ registerLocaleData(en);
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    RouterModule,
+    RouterModule.forRoot(routes),
     BrowserAnimationsModule,
     NzDatePickerModule,
     NzButtonModule,
     NzInputModule,
-    NzDropDownModule
+    NzDropDownModule,
+    RouterTestingModule
   ],
   providers: [
     AppComponent,

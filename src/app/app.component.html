@@ -9,7 +9,11 @@
   <tbody>
   <tr *ngFor="let publish of this.published">
     <td>{{publish.priority}}</td>
-    <td><a (click)="selectPublish(publish.id)" href="#">http://localhost:4200/publishes/{{publish.title}}</a></td>
+    <td>
+      <a (click)="selectPublish(publish.id)" [routerLink]="['/publishes/', publish.title]">
+        http://localhost:4200/publishes/{{publish.title}}
+      </a>
+    </td>
   </tr>
   </tbody>
 </table>
@@ -20,17 +24,22 @@
 
     <nz-dropdown-menu #menu="nzDropdownMenu">
       <ul nz-menu *ngFor="let unpublish of unpublished">
-        <li nz-menu-item><a (click)="selectPublish(unpublish.id)"
-                            href="#">http://localhost:4200/publishes/{{unpublish.title}}</a></li>
+        <li nz-menu-item>
+          <a (click)="selectPublish(unpublish.id)" [routerLink]="['/publishes/', unpublish.title]">
+            http://localhost:4200/publishes/{{unpublish.title}}
+          </a>
+        </li>
       </ul>
     </nz-dropdown-menu>
   </div>
 
   <div class="actions">
     <button nz-button [nzSize]="size" nzType="primary" (click)="showActionHandler()">{{buttonText}}</button>
-    <button *ngIf="publishSelected" nz-button [nzSize]="size" nzType="default" (click)="closeActionHandler()">Close
+    <button *ngIf="publishSelected" nz-button [nzSize]="size" nzType="default" [routerLink]="['']"
+            (click)="closeActionHandler()">Close
     </button>
-    <button *ngIf="publishSelected" nz-button [nzSize]="size" nzType="default" nzDanger (click)="deleteActionHandler()">
+    <button *ngIf="publishSelected" nz-button [nzSize]="size" nzType="default" nzDanger [routerLink]="['']"
+            (click)="deleteActionHandler()">
       Delete
     </button>
   </div>

@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
 
   publishSelected: Publish | null = null;
   publishSelectedDate!: string;
+  slug!: string;
 
   published!: Publish[];
   unpublished!: Publish[];
@@ -56,9 +57,10 @@ export class AppComponent implements OnInit {
     const component = this.refDirective.containerRef.createComponent(editorFactory);
     component.instance.publishToUpdate = this.publishSelected;
     component.instance.closeEmit.subscribe(() => {
-      this.ngOnInit();
       this.refDirective.containerRef.clear();
+      location.reload();
     });
+
   }
 
   public selectPublish(id: number) {
@@ -86,6 +88,7 @@ export class AppComponent implements OnInit {
           this.publishSelected = null;
         });
     }
+    location.reload();
   }
 
 }
