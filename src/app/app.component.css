@@ -1,0 +1,73 @@
+table {
+  margin-bottom: 20px;
+}
+
+thead > tr > td {
+  position: relative;
+  padding: 12px 8px;
+  font-size: 17px;
+  text-align: center;
+}
+
+tbody > tr > td {
+  padding: 4px 12px;
+  font-size: 15px;
+  text-align: center;
+}
+
+thead > tr > td:first-child::after {
+  content: '';
+  position: absolute;
+  top: 16px;
+  right: 0;
+  width: 1px;
+  height: 20px;
+  background-color: #fff;
+}
+
+
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+}
+
+.article {
+  padding: 16px 24px;
+  border: 1px solid #ddd;
+  border-radius: 9px;
+  background-color: #bebebe;
+}
+
+.title {
+  margin-bottom: 4px;
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.subtitle {
+  font-size: 15px;
+  font-weight: 500;
+  color: #828282;
+  font-style: italic;
+}
+
+.text {
+  margin-bottom: 12px;
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.date {
+  text-align: right;
+  font-weight: 500;
+  color: #828282;
+}

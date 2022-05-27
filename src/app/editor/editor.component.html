@@ -1,0 +1,16 @@
+<div class="backdrop" (click)="closeEmit.emit()"></div>
+<div class="editor">
+  <div class="example-input">
+    <input type="text" nz-input placeholder="Title" nzSize="default" [(ngModel)]="publish.title" [value]="publishToUpdate?.title"/>
+    <input type="number" nz-input placeholder="Priority" nzSize="default" [(ngModel)]="publish.priority" [value]="publishToUpdate?.priority"/>
+  </div>
+  <p>
+    <nz-date-picker [(ngModel)]="dataPicker" [nzShowTime]="true" [nzFormat]="dateFormat" [nzInputReadOnly]="true"></nz-date-picker>
+  </p>
+  <div>
+    <textarea nz-input placeholder="Description" [nzAutosize]="{ minRows: 2, maxRows: 6 }" [(ngModel)]="publish.description" [value]="publishToUpdate?.description"></textarea>
+    <textarea nz-input placeholder="Text" [nzAutosize]="{ minRows: 3, maxRows: 30 }" [(ngModel)]="publish.text" [value]="publishToUpdate?.text"></textarea>
+  </div>
+    <button nz-button [nzSize]="size" nzType="primary" (click)="saveHandlerAction()" type="submit">Enter</button>
+    <button nz-button [nzSize]="size" nzType="default" (click)="closeEmit.emit()" type="submit">Close</button>
+</div>

@@ -1,0 +1,35 @@
+.backdrop {
+  position: fixed;
+  top:0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgb(0,0,0,.3);
+  z-index: 1;
+}
+
+.editor {
+  padding: 1rem;
+  background: #fff;
+  margin-top: 3rem;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  border-radius: 9px;
+  z-index: 2;
+}
+
+.example-input .ant-input {
+  width: 200px;
+  margin: 0 8px 8px 0;
+}
+
+textarea + textarea {
+  margin-top: 24px;
+}
+
+[nz-button] {
+  margin-top: 12px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
