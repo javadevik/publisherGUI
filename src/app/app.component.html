@@ -10,7 +10,8 @@
   <tr *ngFor="let publish of this.published">
     <td>{{publish.priority}}</td>
     <td>
-      <a (click)="selectPublish(publish.id)" [routerLink]="['/publishes/', publish.title]">
+      <a (click)="selectPublish(publish.title)"
+         [routerLink]="['/publishes/', publish.title]">
         http://localhost:4200/publishes/{{publish.title}}
       </a>
     </td>
@@ -25,7 +26,7 @@
     <nz-dropdown-menu #menu="nzDropdownMenu">
       <ul nz-menu *ngFor="let unpublish of unpublished">
         <li nz-menu-item>
-          <a (click)="selectPublish(unpublish.id)" [routerLink]="['/publishes/', unpublish.title]">
+          <a (click)="selectPublish(unpublish.title)" [routerLink]="['/publishes/', unpublish.title]">
             http://localhost:4200/publishes/{{unpublish.title}}
           </a>
         </li>

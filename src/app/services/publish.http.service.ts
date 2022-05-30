@@ -22,10 +22,10 @@ export class PublishHttpService {
       .get<Publish[]>('http://localhost:8080/publishes/all/unpublished');
   }
 
-  public getPublishById(id: number) {
+  public getPublishByTitle(title: string) {
     return this.http
       .get<Publish>('http://localhost:8080/publishes', {
-        params: new HttpParams().set('publishId', id)
+        params: new HttpParams().set('title', title)
       });
   }
 

@@ -6,6 +6,7 @@ import {RefDirective} from "./ref.directive";
 import {NzButtonSize} from "ng-zorro-antd/button";
 import {NzPlacementType} from "ng-zorro-antd/dropdown";
 import {formatDate} from "@angular/common";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,6 @@ import {formatDate} from "@angular/common";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'publisherGUI';
 
   @ViewChild(RefDirective, {static: false}) refDirective!: RefDirective;
 
@@ -24,18 +24,28 @@ export class AppComponent implements OnInit {
 
   publishSelected: Publish | null = null;
   publishSelectedDate!: string;
-  slug!: string;
+  title: string | null = null;
 
   published!: Publish[];
   unpublished!: Publish[];
 
   constructor(private publishHttpService: PublishHttpService,
-              private resolver: ComponentFactoryResolver) {
+              private resolver: ComponentFactoryResolver,
+              private router: Router) {
   }
 
   ngOnInit(): void {
+    this.checkSessionStorage();
     this.loadPublished();
     this.loadUnpublished();
+  }
+
+  public checkSessionStorage() {
+    if (sessionStorage.length > 0) {
+      this.title = sessionStorage.getItem('title');
+      if (this.title != null)
+        this.selectPublish(this.title);
+    }
   }
 
   public loadPublished() {
@@ -63,11 +73,12 @@ export class AppComponent implements OnInit {
 
   }
 
-  public selectPublish(id: number) {
-    console.log("id in selectPublish()", id)
-    this.publishHttpService.getPublishById(id).subscribe(publish => {
+  public selectPublish(title: string) {
+    console.log('title in selectPublish()', title)
+    this.publishHttpService.getPublishByTitle(title).subscribe(publish => {
       this.publishSelected = publish;
       this.publishSelectedDate = formatDate(publish.date, 'dd.MM.yyyy', 'en-US');
+      sessionStorage.setItem('title', this.publishSelected.title);
     });
     this.buttonText = 'Update';
     console.log('AppComponent', this.publishSelected);
@@ -77,6 +88,7 @@ export class AppComponent implements OnInit {
     this.publishSelected = null;
     this.publishSelectedDate = '';
     this.buttonText = 'Create';
+    sessionStorage.removeItem('title');
   }
 
   public deleteActionHandler() {
@@ -88,7 +100,13 @@ export class AppComponent implements OnInit {
           this.publishSelected = null;
         });
     }
-    location.reload();
+    sessionStorage.removeItem('title');
+    this.router.navigate([''])
+      .then(
+        () => {
+          window.location.reload();
+        }
+      )
   }
 
 }
